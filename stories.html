@@ -17,19 +17,19 @@
 <section class="view on">
   <p class="eyebrow">Для детей</p>
   <h1>Социальные истории</h1>
-  <p class="lead" style="margin-bottom:24px">Короткие истории помогают понять, как вести себя в жизненных ситуациях. В них вымышленные герои.</p>
-  <div class="grid">
-    <div class="card story"><div class="pic">🚌</div><div><h3>Как ехать в автобусе</h3><button type="button" class="b" style="margin-top:8px">Читать</button></div></div>
-    <div class="card story"><div class="pic">🛒</div><div><h3>Поход в магазин</h3><button type="button" class="b" style="margin-top:8px">Читать</button></div></div>
-    <div class="card story"><div class="pic">👋</div><div><h3>Как поздороваться</h3><button type="button" class="b" style="margin-top:8px">Читать</button></div></div>
-  </div>
-  <h2 style="margin-top:36px">Так выглядит история</h2>
-  <ol class="steps">
-    <li>Сначала я встаю в очередь.</li>
-    <li>Я жду, пока подойдёт моя очередь.</li>
-    <li>Я говорю: «Здравствуйте».</li>
-    <li>Это спокойно и правильно.</li>
-  </ol>
+  <p class="lead" style="margin-bottom:24px">Короткие презентации с простыми объяснениями. Откройте историю и листайте слайды кнопками или пальцем.</p>
+  <div class="grid" id="storylist"></div>
+  <noscript><p>Для просмотра списка нужен включённый JavaScript.</p></noscript>
+  <script src="stories-data.js"></script>
+  <script>
+    document.getElementById('storylist').innerHTML = STORIES.map(function(s){
+      return '<a class="card" href="story.html?id='+encodeURIComponent(s.id)+'"><span class="ico">'+(s.icon||'📖')+'</span><h3></h3><p></p></a>';
+    }).join('');
+    document.querySelectorAll('#storylist .card').forEach(function(c,i){
+      c.querySelector('h3').textContent = STORIES[i].title;
+      c.querySelector('p').textContent = STORIES[i].text || '';
+    });
+  </script>
 </section>
 </main>
 <footer>© Имя Фамилия, 2026. Макет сайта</footer>
