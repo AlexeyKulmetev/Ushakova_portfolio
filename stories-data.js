@@ -8,8 +8,8 @@ var STORIES = [
   "text": "Социальная история: что будет, как вести себя и что делать, если что-то непонятно",
   "icon": "🌊",
   "type": "steps",
-  "folder": "stories/lake",
-  "download": "stories/lake/lake.docx",
+  "folder": "source/Social_stories/lake",
+  "download": "source/Social_stories/lake/lake.docx",
   "downloadLabel": "Скачать историю (Word)",
   "steps": [
     {
