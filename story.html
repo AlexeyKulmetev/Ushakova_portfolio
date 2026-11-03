@@ -18,44 +18,70 @@
   <p class="crumbs"><a href="stories.html">Социальные истории</a> / <span id="crumb"></span></p>
   <h1 id="title"></h1>
   <div class="reader" id="reader" aria-live="polite">
-    <div class="stage"><img id="slide" alt=""></div>
-    <div class="controls">
+    <div class="stage" id="stage"></div>
+    <div class="controls" id="controls">
       <button type="button" class="b alt" id="prev">← Назад</button>
       <span id="pos"></span>
       <button type="button" class="b" id="next">Далее →</button>
     </div>
-    <div class="bar"><span id="fill"></span></div>
+    <div class="bar" id="bar"><span id="fill"></span></div>
+    <button type="button" class="b alt" id="mode" style="margin-top:18px">Показать все шаги списком</button>
   </div>
   <p id="msg" style="display:none">История не найдена. <a href="stories.html" style="color:var(--teal)">Вернуться к списку</a></p>
-  <a class="dl" id="dl" style="display:none">Скачать презентацию (PowerPoint)</a>
+  <a class="dl" id="dl" style="display:none"></a>
   <script src="stories-data.js"></script>
   <script>
   (function(){
-    var id = new URLSearchParams(location.search).get('id');
-    var st = STORIES.filter(function(x){return x.id===id})[0];
-    if(!st){document.getElementById('reader').style.display='none';document.getElementById('msg').style.display='block';return;}
-    document.title = st.title+' — портфолио учителя-дефектолога';
-    document.getElementById('title').textContent = st.title;
-    document.getElementById('crumb').textContent = st.title;
-    if(st.download){var d=document.getElementById('dl');d.href=st.download;d.setAttribute('download','');d.style.display='inline-block';}
-    var i=1, n=st.count, img=document.getElementById('slide');
-    function src(k){return st.folder+'/'+(k<10?'0':'')+k+'.jpg'}
-    function show(k){
-      i=Math.max(1,Math.min(n,k));
-      img.src=src(i); img.alt='Слайд '+i+' из '+n;
-      document.getElementById('pos').textContent=i+' из '+n;
-      document.getElementById('fill').style.width=(i/n*100)+'%';
-      document.getElementById('prev').disabled=(i===1);
-      document.getElementById('next').disabled=(i===n);
-      if(i<n){new Image().src=src(i+1);}
+    var id=new URLSearchParams(location.search).get('id');
+    var st=STORIES.filter(function(x){return x.id===id})[0];
+    var $=function(k){return document.getElementById(k)};
+    if(!st){$('reader').style.display='none';$('msg').style.display='block';return;}
+    document.title=st.title+' — портфолио учителя-дефектолога';
+    $('title').textContent=st.title; $('crumb').textContent=st.title;
+    if(st.download){var d=$('dl');d.href=st.download;d.setAttribute('download','');d.textContent=st.downloadLabel||'Скачать файл';d.style.display='inline-block';}
+    var isSteps=st.type==='steps', n=isSteps?st.steps.length:st.count, i=1, list=false;
+    var stage=$('stage');
+    function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
+    function pad(k){return (k<10?'0':'')+k}
+    function stepCard(k){
+      var s=st.steps[k-1], c=el('div','stepcard');
+      var lines=s.text.split('\n'), p=el('p','txt',lines[0]); c.appendChild(p);
+      if(lines.length>1){var ul=el('ul','pts');lines.slice(1).forEach(function(l){ul.appendChild(el('li','',l.replace(/^[-–•]\s*/,'')))});c.appendChild(ul);}
+      var pics=el('div','pics');
+      s.images.forEach(function(m){
+        var f=el('figure'), im=el('img');
+        im.src=st.folder+'/'+m.img; im.alt=m.caption||''; im.loading='lazy';
+        f.appendChild(im); if(m.caption)f.appendChild(el('figcaption','',m.caption)); pics.appendChild(f);
+      });
+      c.appendChild(pics);
+      return c;
     }
-    document.getElementById('prev').onclick=function(){show(i-1)};
-    document.getElementById('next').onclick=function(){show(i+1)};
-    document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+    function render(){
+      stage.innerHTML='';
+      $('controls').style.display=$('bar').style.display=list?'none':'';
+      $('mode').textContent=list?'Показывать по одному шагу':(isSteps?'Показать все шаги списком':'Показать все слайды списком');
+      stage.className='stage'+(isSteps?' steps':'');
+      if(list){
+        for(var k=1;k<=n;k++){
+          if(isSteps){var w=el('div','listitem');w.appendChild(el('span','num',String(k)));w.appendChild(stepCard(k));stage.appendChild(w);}
+          else{var im=el('img');im.src=st.folder+'/'+pad(k)+'.jpg';im.alt='Слайд '+k+' из '+n;im.loading='lazy';stage.appendChild(im);}
+        }
+        stage.classList.add('all'); return;
+      }
+      if(isSteps){stage.appendChild(stepCard(i));}
+      else{var im2=el('img');im2.src=st.folder+'/'+pad(i)+'.jpg';im2.alt='Слайд '+i+' из '+n;stage.appendChild(im2);}
+      $('pos').textContent=(isSteps?'Шаг ':'Слайд ')+i+' из '+n;
+      $('fill').style.width=(i/n*100)+'%';
+      $('prev').disabled=(i===1); $('next').disabled=(i===n);
+    }
+    function go(k){i=Math.max(1,Math.min(n,k));render();}
+    $('prev').onclick=function(){go(i-1)}; $('next').onclick=function(){go(i+1)};
+    $('mode').onclick=function(){list=!list;render();window.scrollTo(0,0)};
+    document.addEventListener('keydown',function(e){if(list)return;if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
     var x0=null;
-    img.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
-    img.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
-    show(1);
+    stage.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+    stage.addEventListener('touchend',function(e){if(x0===null||list)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>60)go(i+(dx<0?1:-1));x0=null});
+    render();
   })();
   </script>
 </section>
