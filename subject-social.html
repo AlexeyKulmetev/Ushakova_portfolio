@@ -17,11 +17,11 @@
 <section class="view on">
   <p class="crumbs"><a href="subjects.html">Предметы</a> / Основы социальной жизни</p>
   <h1>Основы социальной жизни</h1>
-  <p class="lead">Материалы по предмету. Файлы открываются прямо на странице, их можно скачать.</p>
+  <p class="lead">Материалы по предмету. Презентацию можно листать на сайте или скачать.</p>
   <div class="tabs">
     <div class="sec"><h2>Презентации</h2>
-      <div class="file"><span class="t">Название презентации 1</span><span class="tag">PDF</span><button type="button" class="b">Открыть</button><button type="button" class="b alt">Скачать</button></div>
-      <div class="file"><span class="t">Название презентации 2</span><span class="tag">PPTX</span><button type="button" class="b">Открыть</button><button type="button" class="b alt">Скачать</button></div>
+      <div id="preslist"></div>
+      <noscript><p><a href="material.html?id=breakfast">Приготовление завтрака. Меню завтрака</a></p><p><a href="material.html?id=electrical-safety">Безопасность при обращении с бытовыми электроприборами</a></p></noscript>
     </div>
     <div class="sec"><h2>Конспекты уроков</h2>
       <div class="file"><span class="t">Тема урока 1</span><span class="tag">DOCX</span><button type="button" class="b">Открыть</button><button type="button" class="b alt">Скачать</button></div>
@@ -35,6 +35,17 @@
   </div>
 </section>
 </main>
-<footer>© Имя Фамилия, 2026. Макет сайта</footer>
+<footer>© Ирина Ушакова, 2026.</footer>
+<script src="materials-data.js"></script>
+<script>
+(function(){
+  var items=MATERIALS.filter(function(m){return m.subjectId==='osg'});
+  var box=document.getElementById('preslist');
+  box.innerHTML=items.map(function(m){
+    return '<div class="file"><span class="t"></span><span class="tag">'+m.count+' слайдов</span><a class="b" href="material.html?id='+encodeURIComponent(m.id)+'">Открыть</a>'+(m.download?'<a class="b alt" href="'+m.download+'" download>Скачать</a>':'')+'</div>';
+  }).join('');
+  box.querySelectorAll('.t').forEach(function(el,i){el.textContent=items[i].title});
+})();
+</script>
 </body>
 </html>

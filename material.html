@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E📚%3C/text%3E%3C/svg%3E">
+<title>Презентация — портфолио учителя-дефектолога</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="deck-page">
+<header class="top"><div class="wrap">
+  <a class="brand" href="index.html">Портфолио учителя-дефектолога</a>
+  <nav><a href="index.html">Главная</a><a href="about.html">Об учителе</a><a href="subjects.html" class="on">Предметы</a><a href="stories.html">Социальные истории</a><a href="contacts.html">Контакты</a></nav>
+</div></header>
+<main class="wrap">
+<section class="view on">
+  <p class="crumbs"><a href="subjects.html">Предметы</a> / <a id="subject" href="subjects.html"></a> / <span id="crumb"></span></p>
+  <h1 id="title"></h1>
+  <div class="reader fit" id="reader" aria-live="polite">
+    <div class="stage fit" id="stage"><img id="slide" alt=""></div>
+    <div class="controls" id="controls">
+      <button type="button" class="b alt" id="prev">← Назад</button>
+      <span id="pos"></span>
+      <button type="button" class="b" id="next">Далее →</button>
+    </div>
+    <div class="bar" id="bar"><span id="fill"></span></div>
+    <div class="deck-actions">
+      <button type="button" class="b alt" id="full">На весь экран</button>
+      <button type="button" class="b alt" id="mode">Показать все слайды</button>
+    </div>
+    <p class="hint" id="hint">Листайте стрелками, пробелом или нажатием на слайд: левая часть — назад, правая — дальше.</p>
+  </div>
+  <p id="msg" style="display:none">Материал не найден. <a href="subjects.html" style="color:var(--teal)">Вернуться к предметам</a></p>
+  <a class="dl" id="dl" style="display:none"></a>
+  <script src="materials-data.js"></script>
+  <script>
+  (function(){
+    var id=new URLSearchParams(location.search).get('id');
+    var m=MATERIALS.filter(function(x){return x.id===id})[0];
+    var $=function(k){return document.getElementById(k)};
+    if(!m){$('reader').style.display='none';$('msg').style.display='block';return;}
+    document.title=m.title+' — портфолио учителя-дефектолога';
+    $('title').textContent=m.title;
+    $('crumb').textContent=m.title;
+    $('subject').textContent=m.subject;
+    $('subject').href=m.subjectHref;
+    if(m.download){var d=$('dl');d.href=m.download;d.setAttribute('download','');d.textContent=m.downloadLabel||'Скачать файл';d.style.display='inline-block';}
+    var n=m.count, i=1, list=false, img=$('slide'), stage=$('stage'), reader=$('reader');
+    function pad(k){return (k<10?'0':'')+k}
+    function src(k){return m.folder+'/'+pad(k)+'.'+(m.ext||'jpg')}
+    function preload(k){if(k<1||k>n)return;var p=new Image();p.src=src(k)}
+    function showSlide(){
+      stage.innerHTML='';
+      stage.className='stage fit'+(list?' all':'');
+      $('controls').style.display=$('bar').style.display=list?'none':'';
+      $('full').style.display=list?'none':'';
+      $('mode').textContent=list?'Показывать по одному слайду':'Показать все слайды';
+      $('hint').style.display=list?'none':'';
+      if(list){
+        stage.style.cursor='default';
+        for(var k=1;k<=n;k++){
+          var im=document.createElement('img');
+          im.src=src(k); im.alt='Слайд '+k+' из '+n; im.loading='lazy';
+          stage.appendChild(im);
+        }
+        return;
+      }
+      stage.style.cursor='pointer';
+      img=document.createElement('img');
+      img.id='slide'; img.alt='Слайд '+i+' из '+n; img.src=src(i);
+      stage.appendChild(img);
+      $('pos').textContent=i+' из '+n;
+      $('fill').style.width=(i/n*100)+'%';
+      $('prev').disabled=(i===1);
+      $('next').disabled=(i===n);
+      preload(i+1); preload(i-1);
+    }
+    function go(k){if(list)return;i=Math.max(1,Math.min(n,k));showSlide();}
+    $('prev').onclick=function(){go(i-1)};
+    $('next').onclick=function(){go(i+1)};
+    $('mode').onclick=function(){list=!list;showSlide();if(!list)window.scrollTo(0,0)};
+    $('full').onclick=function(){
+      if(document.fullscreenElement){document.exitFullscreen();return;}
+      if(reader.requestFullscreen) reader.requestFullscreen();
+    };
+    document.addEventListener('fullscreenchange',function(){
+      $('full').textContent=document.fullscreenElement?'Выйти из полного экрана':'На весь экран';
+    });
+    document.addEventListener('keydown',function(e){
+      if(e.target && (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'))return;
+      if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(i+1)}
+      if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1)}
+      if(e.key==='Home'){e.preventDefault();go(1)}
+      if(e.key==='End'){e.preventDefault();go(n)}
+      if(e.key==='f'||e.key==='F'||e.key==='а'||e.key==='А'){$('full').click()}
+    });
+    var fromTouch=false;
+    stage.addEventListener('click',function(e){
+      if(list||fromTouch){fromTouch=false;return;}
+      var r=stage.getBoundingClientRect();
+      go(i+((e.clientX-r.left)<r.width*0.32?-1:1));
+    });
+    var x0=null;
+    stage.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+    stage.addEventListener('touchend',function(e){
+      fromTouch=true;
+      if(x0===null||list)return;
+      var dx=e.changedTouches[0].clientX-x0;
+      if(Math.abs(dx)>50)go(i+(dx<0?1:-1));
+      x0=null;
+    });
+    showSlide();
+  })();
+  </script>
+</section>
+</main>
+<footer>© Ирина Ушакова, 2026.</footer>
+</body>
+</html>

@@ -59,8 +59,8 @@ a.card:hover{border-color:var(--teal);transform:translateY(-2px)}
 .file:first-of-type{border-top:0}
 .file .t{flex:1 1 220px;font-weight:600}
 .tag{font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--sage);color:var(--ink)}
-button.b{font:inherit;font-size:.9rem;font-weight:700;padding:9px 16px;border-radius:10px;border:2px solid var(--teal);background:var(--teal);color:var(--teal-ink);cursor:pointer}
-button.b.alt{background:transparent;color:var(--teal)}
+a.b,button.b{font:inherit;font-size:.9rem;font-weight:700;padding:9px 16px;border-radius:10px;border:2px solid var(--teal);background:var(--teal);color:var(--teal-ink);cursor:pointer;display:inline-block;text-decoration:none;text-align:center}
+a.b.alt,button.b.alt{background:transparent;color:var(--teal)}
 
 .story{display:grid;gap:14px;grid-template-columns:auto 1fr;align-items:center}
 .story .pic{width:76px;height:76px;border-radius:16px;background:var(--apricot-soft);display:grid;place-items:center;font-size:2.2rem}
@@ -83,6 +83,22 @@ footer{border-top:1px solid var(--line);color:var(--muted);text-align:center;pad
 .bar span{display:block;height:100%;background:var(--teal);width:0;transition:width .2s}
 .dl{margin-top:22px;color:var(--teal);font-weight:700}
 @media(prefers-reduced-motion:reduce){.bar span{transition:none}}
+
+/* просмотр презентации: слайд помещается в экран */
+body.deck-page .view{padding:22px 0 36px}
+body.deck-page h1{font-size:clamp(1.45rem,3.2vw,2.15rem);margin-bottom:8px}
+body.deck-page .wrap{max-width:1100px}
+.reader.fit{max-width:none}
+.stage.fit{display:grid;place-items:center;background:#1a2428;height:min(74vh,calc(100dvh - 250px));min-height:220px;cursor:pointer}
+.stage.fit img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
+.stage.fit.all{height:auto;min-height:0;overflow:visible;cursor:default;place-items:stretch;background:transparent;border:0}
+.stage.fit.all img{width:100%;max-height:none;border-radius:14px;border:1px solid var(--line)}
+.deck-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.hint{margin-top:10px;color:var(--muted);font-size:.92rem}
+.reader:fullscreen,.reader:-webkit-full-screen{background:#10181b;max-width:none;width:100%;height:100%;margin:0;padding:12px 16px 16px;display:flex;flex-direction:column;box-sizing:border-box}
+.reader:fullscreen .stage.fit,.reader:-webkit-full-screen .stage.fit{flex:1;height:auto;min-height:0;border:0;background:transparent}
+.reader:fullscreen .hint,.reader:-webkit-full-screen .hint{color:#a6b4b8}
+.reader:fullscreen #pos,.reader:-webkit-full-screen #pos{color:#d5e0e2}
 
 /* история по шагам */
 .stage.steps{padding:22px;overflow:visible}
