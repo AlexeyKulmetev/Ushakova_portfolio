@@ -25,5 +25,17 @@ var MATERIALS = [
     ext: "jpg",
     download: "source/OSG/electrical-safety/electrical-safety.pptx",
     downloadLabel: "Скачать презентацию (PowerPoint)"
+  },
+  {
+    id: "pdd",
+    subjectId: "osg",
+    subject: "Основы социальной жизни",
+    subjectHref: "subject-social.html",
+    title: "Правила дорожного движения",
+    folder: "source/OSG/pdd",
+    count: 32,
+    ext: "jpg",
+    download: "source/OSG/pdd/pdd.pptx",
+    downloadLabel: "Скачать презентацию (PowerPoint)"
   }
 ];

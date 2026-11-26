@@ -21,7 +21,7 @@
   <div class="tabs">
     <div class="sec"><h2>Презентации</h2>
       <div id="preslist"></div>
-      <noscript><p><a href="material.html?id=breakfast">Приготовление завтрака. Меню завтрака</a></p><p><a href="material.html?id=electrical-safety">Безопасность при обращении с бытовыми электроприборами</a></p></noscript>
+      <noscript><p><a href="material.html?id=breakfast">Приготовление завтрака. Меню завтрака</a></p><p><a href="material.html?id=electrical-safety">Безопасность при обращении с бытовыми электроприборами</a></p><p><a href="material.html?id=pdd">Правила дорожного движения</a></p></noscript>
     </div>
     <div class="sec"><h2>Конспекты уроков</h2>
       <div class="file"><span class="t">Тема урока 1</span><span class="tag">DOCX</span><button type="button" class="b">Открыть</button><button type="button" class="b alt">Скачать</button></div>
@@ -39,6 +39,7 @@
 <script src="materials-data.js"></script>
 <script>
 (function(){
+  function pl(n){var a=n%10,b=n%100;return (b>10&&b<20)?'слайдов':(a===1?'слайд':(a>1&&a<5?'слайда':'слайдов'))}
   var items=MATERIALS.filter(function(m){return m.subjectId==='osg'});
   var box=document.getElementById('preslist');
   box.innerHTML=items.map(function(m){
