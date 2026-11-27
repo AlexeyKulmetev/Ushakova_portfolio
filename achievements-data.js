@@ -1,8 +1,25 @@
 /* Дипломы, сертификаты и свидетельства (раздел «Об учителе → Достижения»).
    Новый документ: 1) положите скан в папку source/Achievements/;
    2) скопируйте блок ниже и поменяйте данные; не забудьте запятую между блоками.
-   thumb (маленькое превью) можно не указывать — тогда в списке покажется сам скан. */
+   thumb (маленькое превью) можно не указывать — тогда в списке покажется сам скан.
+   note (дополнительная строка) указывать необязательно. */
 var ACHIEVEMENTS = [
+  {
+    kind: "Сертификат",
+    title: "Публикация статьи «Повышение мотивации и познавательной активности на уроках ОСЖ»",
+    org: "Международный центр образования и педагогики (МЦОиП)",
+    date: "29 мая 2026",
+    file: "source/Achievements/2026-05-article-motivation-osj.jpg",
+    thumb: "source/Achievements/thumbs/2026-05-article-motivation-osj.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Публикация статьи «Повышение мотивации и познавательной активности через интеграцию ЦОР и игр»",
+    org: "Международный центр образования и педагогики (МЦОиП)",
+    date: "29 мая 2026",
+    file: "source/Achievements/2026-05-article-motivation-digital-games.jpg",
+    thumb: "source/Achievements/thumbs/2026-05-article-motivation-digital-games.jpg"
+  },
   {
     kind: "Сертификат",
     title: "Публикация статьи «учитель-олигофренопедагог»",
@@ -10,6 +27,24 @@ var ACHIEVEMENTS = [
     date: "29 мая 2026",
     file: "source/Achievements/2026-05-article-oligophrenopedagog.jpg",
     thumb: "source/Achievements/thumbs/2026-05-article-oligophrenopedagog.jpg"
+  },
+  {
+    kind: "Благодарственное письмо",
+    title: "Подготовка обучающихся к олимпиаде «Правила дорожного движения»",
+    note: "Всероссийская онлайн-олимпиада",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "22 января 2026",
+    file: "source/Achievements/2026-01-thanks-road-rules.jpg",
+    thumb: "source/Achievements/thumbs/2026-01-thanks-road-rules.jpg"
+  },
+  {
+    kind: "Благодарственное письмо",
+    title: "Подготовка обучающихся к олимпиаде «Безопасность в зимний период»",
+    note: "Всероссийская онлайн-олимпиада для дошкольников",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "22 января 2026",
+    file: "source/Achievements/2026-01-thanks-winter-safety.jpg",
+    thumb: "source/Achievements/thumbs/2026-01-thanks-winter-safety.jpg"
   },
   {
     kind: "Диплом",
