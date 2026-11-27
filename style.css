@@ -134,3 +134,4 @@ body.deck-page .wrap{max-width:1100px}
 .lb-stage img{justify-self:center;max-width:100%;max-height:calc(100dvh - 110px);width:auto;height:auto;object-fit:contain;background:#fff;border-radius:6px}
 @media(max-width:560px){.lb-nav{width:36px;height:36px}.lb-stage{gap:4px;padding:0 4px 12px}}
 #achievements{scroll-margin-top:84px}
+h2[id]{scroll-margin-top:84px}

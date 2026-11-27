@@ -44,3 +44,108 @@ var ACHIEVEMENTS = [
     thumb: "source/Achievements/thumbs/2017-12-multiurok-shoes.jpg"
   }
 ];
+
+/* Достижения учеников: олимпиады и конкурсы (раздел «Об учителе → Достижения учеников»).
+   Новый документ добавляется так же: скан в папку source/Achievements/students/ и блок ниже.
+   note (например, количество баллов) указывать необязательно. */
+var STUDENT_ACHIEVEMENTS = [
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «Основы светской этики»: 1 место",
+    note: "20 баллов из 21 · для школьников",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "21 мая 2026",
+    file: "source/Achievements/students/2026-05-ethics-place1.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-05-ethics-place1.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «Экологическая грамотность»: 2 место",
+    note: "15 баллов из 17 · для школьников",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "21 мая 2026",
+    file: "source/Achievements/students/2026-05-eco-place2-a.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-05-eco-place2-a.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «Правила дорожного движения»: 1 место",
+    note: "17 баллов из 17",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "20 мая 2026",
+    file: "source/Achievements/students/2026-05-road-rules-place1.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-05-road-rules-place1.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «Экологическая грамотность»: 2 место",
+    note: "15 баллов из 17 · для школьников",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "20 мая 2026",
+    file: "source/Achievements/students/2026-05-eco-place2-b.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-05-eco-place2-b.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «10 чудес России, сотворённых природой»: 3 место",
+    note: "9 баллов из 12",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "20 мая 2026",
+    file: "source/Achievements/students/2026-05-wonders-place3.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-05-wonders-place3.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «Знатоки живой природы»: 1 место",
+    note: "20 баллов из 21 · для дошкольников",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "20 мая 2026",
+    file: "source/Achievements/students/2026-05-living-nature-place1.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-05-living-nature-place1.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «Основы светской этики»: 2 место",
+    note: "17 баллов из 21 · для школьников",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "20 мая 2026",
+    file: "source/Achievements/students/2026-05-ethics-place2.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-05-ethics-place2.jpg"
+  },
+  {
+    kind: "Диплом",
+    title: "Олимпиада «Правила дорожного движения»: 1 место",
+    note: "17 баллов из 17",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "22 января 2026",
+    file: "source/Achievements/students/2026-01-road-rules-diploma-place1.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-01-road-rules-diploma-place1.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «Правила дорожного движения»: 1 место",
+    note: "17 баллов из 17",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "22 января 2026",
+    file: "source/Achievements/students/2026-01-road-rules-place1.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-01-road-rules-place1.jpg"
+  },
+  {
+    kind: "Диплом",
+    title: "Олимпиада «Безопасность в зимний период»: 1 место",
+    note: "17 баллов из 17 · для дошкольников",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "22 января 2026",
+    file: "source/Achievements/students/2026-01-winter-safety-place1.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-01-winter-safety-place1.jpg"
+  },
+  {
+    kind: "Сертификат",
+    title: "Олимпиада «За полярным кругом»: 1 место",
+    note: "13 баллов из 14 · для учащихся начальной школы",
+    org: "Высшая школа делового администрирования (S-BA.RU)",
+    date: "22 января 2026",
+    file: "source/Achievements/students/2026-01-polar-place1.jpg",
+    thumb: "source/Achievements/students/thumbs/2026-01-polar-place1.jpg"
+  }
+];
